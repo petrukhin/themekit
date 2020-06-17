@@ -35,11 +35,11 @@ themekit build
 
 #### Options
 
-| Option      | Description                                | Default              |
-|-------------|--------------------------------------------|----------------------|
-| -w --watch  | Auto rebuilds themes after change sources. | —                    |
-| -c --config | The path to a themekit config file.        | themekit.config.json |
-| -h --help   | Show help information.                     | —                    |
+| Option             | Description                                | Default              |
+|--------------------|--------------------------------------------|----------------------|
+| -w --watch         | Auto rebuilds themes after change sources. | —                    |
+| -c --config [path] | The path to a themekit config file.        | themekit.config.json |
+| -h --help          | Show help information.                     | —                    |
 
 ## Get started
 
@@ -195,15 +195,13 @@ component:
 }
 ```
 
-<!-- ### Mappings
+### Additional features
 
-Бывают случаи когда необходимо сохранить обратную совместимость... -->
+#### Mappers
 
-### Features
+#### Color processing
 
-whitepaper
-color-process
-mappings
+#### Whitepaper
 
 ## License
 
