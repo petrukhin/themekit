@@ -39,7 +39,7 @@ themekit build
 | -c --config | The path to a themekit config file.        | themekit.config.json |
 | -h --help   | Show help information.                     | —                    |
 
-## Starting
+## Get started
 
 ### Common configuration
 
