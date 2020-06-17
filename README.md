@@ -2,6 +2,14 @@
 
 Themkit is a build system for design-tokens on any platform. This system is based on redefinition levels, which allows you to describe platform-specific values in a single place. Themkit provides you to extend existing themes in order to supplement or redefine existing tokens, it also allows you to use the basic theme set and add it to the service.
 
+## Features
+
+* Поддержка платформ (desktop, touch, etc...) для тем.
+* Возможность наследоваться от существующих тем.
+* Возможность мапинга для названий токенов (css and flat-json only).
+* Работа с цветом
+* Whitepaper
+
 ## Installation
 
 ```sh
@@ -13,25 +21,29 @@ yarn add --dev @yandex/themekit
 
 ## Usage
 
-На данный момент темкит доступен только в качестве CLI инструмента.
+A themekit is only available as a CLI tool.
 
-Сборка всех тем:
+### Build
+
+Builds all themes:
 
 ```sh
 themekit build
 ```
 
-Сборка тем в режиме наблюдения:
+#### Options
 
-```sh
-themekit build -w
-```
+| Option      | Description                                | Default              |
+|-------------|--------------------------------------------|----------------------|
+| -w --watch  | Auto rebuilds themes after change sources. | —                    |
+| -c --config | The path to a themekit config file.        | themekit.config.json |
+| -h --help   | Show help information.                     | —                    |
 
-## Конфигурация
+## Starting
 
-### Настройка проекта
+### Common configuration
 
-Для начала необходимо создать файл конфигурации `themekit.config.json`, поддерживается так же и js формат.
+First, you need to create a config file `themekit.config.json`:
 
 ```json
 {
@@ -41,7 +53,7 @@ themekit build -w
   "output": {
     "css": {
       "transforms": ["attribute/cti", "time/seconds", "color/css", "name/cti/kebab"],
-      "buildPath": "./src/...",
+      "buildPath": "./src/theme/themes",
       "files": [
         {
           "destination": "[entry]/[platform]/color.css",
@@ -53,9 +65,7 @@ themekit build -w
 }
 ```
 
-#### Интерфейс конфига
-
-<!-- TODO: стоит сказать про entry + platform -->
+#### Interface
 
 ```ts
 {
@@ -63,22 +73,48 @@ themekit build -w
    *
    */
   entry: Record<string, string>
-
   /**
    *
    */
   output: Record<string, {
+    /**
+     *
+     */
     transforms: string[]
-    transformGroup?: string /// ????
+    /**
+     *
+     */
+    transformGroup?: string
+    /**
+     *
+     */
     buildPath: string
-    files: Array<{ destination: string, format: string, filter: any }>
+    /**
+     *
+     */
+    files: Array<{
+      /**
+       * Output filepath, also supports helper placeholders:
+       * [entry] — theme name
+       * [platform] — platform name
+       */
+      destination: string
+      /**
+       *
+       */
+      format: string
+      /**
+       *
+       */
+      filter: any
+    }>
   }>
 }
 ```
 
-### Настройка темы
+### Theme configuration
 
-Базовая настройка темы состоит из секции `sources` в которой перечислены какие токены должны ходить в данную тему (разрешено указывать полный путь или glob).
+The basic theme configuration consists of the sources section, which lists which tokens should include to this theme (you can specify the full path or glob).
 
 ```json
 {
@@ -90,28 +126,27 @@ themekit build -w
 }
 ```
 
-#### Интерфейс темы
+#### Interface
 
 ```ts
 {
+  /**
+   *
+   */
   extends?: string
-
   /**
    *
    * @default ['common']
    */
   platforms?: Array<'common' | 'deskpad' | 'desktop' | 'touch' | 'touch-pad' | 'touch-phone'>
-
   /**
    * Whitepapers XXX (only for css)
    */
   whitepaper?: Record<string, string>
-
   /**
    * Mappers list
    */
   mappers?: string[]
-
   /**
    * Sources list
    */
@@ -128,17 +163,17 @@ component:
   type:
     base:
       fillColor:
-        value: '#000'
+        value: "#000"
       typoColor:
-        value: '#fff'
+        value: "#fff"
     danger:
       fillColor:
-        value: '#f00'
+        value: "#f00"
       typoColor:
-        value: '#fff'
+        value: "#fff"
 ```
 
-#### Интерфейс токена
+#### Interface
 
 ```ts
 {
@@ -146,12 +181,10 @@ component:
    * Token value
    */
   value: string
-
   /**
    * Token group
    */
   group?: string
-
   /**
    * Token comment
    */
@@ -165,6 +198,7 @@ component:
 
 ### Features
 
+whitepaper
 color-process
 mappings
 
