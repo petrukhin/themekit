@@ -2,15 +2,13 @@
 
 [![npm](https://img.shields.io/npm/v/@yandex/themekit.svg?style=flat-square&labelColor=111)][npm] [![examples](https://img.shields.io/badge/examples-folder-007ecc?style=flat-square&labelColor=111)][examples]
 
-Themkit is a build system for design-tokens on any platform. This system is based on redefinition levels, which allows you to describe platform-specific values in a single place. Themkit provides you to extend existing themes in order to supplement or redefine existing tokens, it also allows you to use the basic theme set and add it to the service.
+Themkit is a build system for design-tokens for any platform. This system is based on [style-dictionary](sd-github) API and [redefinition levels](#platforms), which allows you to describe platform-specific values. Themkit provides you to extend existing themes in order to supplement or redefine existing tokens, it also allows you to use the basic theme set and add it to the service.
 
 ## Features
 
-* Поддержка платформ (desktop, touch, etc...) для тем.
-* Возможность наследоваться от существующих тем.
-* Возможность мапинга для названий токенов (css and flat-json only).
-* Работа с цветом
-* Whitepaper
+- 📚 Define tokens once and get result for any format, for example js, css or json.
+- 🛠 Every part of the theme or some of the tokens is extendable and overridable.
+- 💻 Tokens may be defined for each platforms, for example desktop and touch.
 
 ## Installation
 
@@ -197,9 +195,58 @@ component:
 
 ### Additional features
 
+#### Platforms
+
+<!-- TODO: тут сказать из чего собирается -->
+
 #### Mappers
 
+<!-- надо сказать что пока только css/json-only (а по факту только парам-кейс-нейминг) -->
+
+```json
+{
+  "mappers": ["./src/components/**/*.mappers.yml"]
+}
+```
+
+```yml
+component:
+  type:
+    base:
+      fillColor:
+        value: "#000"
+```
+
+```yml
+component-type-base-fill-color: component-color
+```
+
 #### Color processing
+
+<!-- TODO: example -->
+<!-- TODO: надо сказать что под капотом -->
+
+```json
+{
+  "output" {
+    "actions": ["process-color"]
+  }
+}
+```
+
+```yml
+component:
+  type:
+    base:
+      fillColor:
+        value: "color(#000, a(80%))"
+```
+
+```css
+:root {
+  --component-type-base-fill-color: rgba(0, 0, 0, .8);
+}
+```
 
 #### Whitepaper
 
@@ -210,3 +257,4 @@ component:
 [npm]: https://www.npmjs.com/package/@yandex/themekit
 [license]: https://github.com/yarastqt/themekit/blob/master/LICENSE.md
 [examples]: https://github.com/yarastqt/themekit/tree/master/examples
+[sd-github]: https://github.com/amzn/style-dictionary
