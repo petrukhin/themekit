@@ -81,16 +81,24 @@ First, you need to create a config file `themekit.config.json`:
   output: Record<string, {
     /**
      * List of transforms should be applied for each token
+     *
+     * @see https://amzn.github.io/style-dictionary/#/transforms
      */
     transforms: string[]
     /**
      * A preset that contains the transforms set
+     *
+     * @see https://amzn.github.io/style-dictionary/#/transform_groups
      */
     transformGroup?: string
     /**
      * Output directory for building results
      */
     buildPath: string
+    /**
+     * @see https://amzn.github.io/style-dictionary/#/actions
+     */
+    actions: string[]
     /**
      * List of files to get at the output
      */
@@ -103,6 +111,7 @@ First, you need to create a config file `themekit.config.json`:
       destination: string
       /**
        *
+       * @see https://amzn.github.io/style-dictionary/#/formats
        */
       format: string
       /**
